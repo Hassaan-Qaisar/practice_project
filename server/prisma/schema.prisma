@@ -4,11 +4,35 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+// Model representing a class
+model Class {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId     // Unique identifier for Class
+  name        String    @unique                                           // Unique name for the Class
+  teacher     String                                                      // Teacher for the Class
+  classroom   String                                                      // Classroom location for the Class
+  description String                                                      // Description of the Class
+  studentIDs  String[]  @db.ObjectId                                      // Array of student IDs enrolled (references Student.id)
+  students    Student[] @relation(fields: [studentIDs], references: [id]) // Relationship to Student model
+}
+
+// Model representing a student
+model Student {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId      // Unique identifier for Student
+  name       String                                                      // Student's name
+  rollnumber String   @unique                                            // Unique roll number for the Student
+  age        Int                                                         // Student's age
+  gender     String                                                      // Student's gender  
+  email      String                                                      // Student's email address
+  address    String                                                      // Student's address
+  classIDs   String[] @db.ObjectId                                       // Array of class IDs enrolled in (references Class.id)
+  class      Class[]  @relation(fields: [classIDs], references: [id])    // Relationship to Class model
 }
