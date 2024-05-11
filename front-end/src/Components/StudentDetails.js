@@ -24,28 +24,30 @@ export const StudentDetails = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       {studentDetails ? (
-        <div className="bg-white shadow-md rounded-lg p-4">
-          <h2 className="text-2xl font-bold mb-4">{studentDetails.name}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <p className="text-gray-700">Roll Number:</p>
-              <p className="font-bold">{studentDetails.rollnumber}</p>
-            </div>
-            <div className="md:col-span-2">
-              <p className="text-gray-700">Email:</p>
-              <p className="text-sm break-words">{studentDetails.email}</p>
-            </div>
-            <div className="md:col-span-2">
-              <p className="text-gray-700">Address:</p>
-              <p className="text-sm">{studentDetails.address}</p>
-            </div>
-            <div>
-              <p className="text-gray-700">Age:</p>
-              <p className="font-bold">{studentDetails.age}</p>
-            </div>
-            <div>
-              <p className="text-gray-700">Gender:</p>
-              <p className="font-bold">{studentDetails.gender}</p>
+        <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+          <div className="px-6 py-4">
+            <h2 className="text-xl font-bold mb-4">{studentDetails.name}</h2>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <p className="font-semibold">Roll Number:</p>
+                <p>{studentDetails.rollnumber}</p>
+              </div>
+              <div>
+                <p className="font-semibold">Email:</p>
+                <p>{studentDetails.email}</p>
+              </div>
+              <div>
+                <p className="font-semibold">Address:</p>
+                <p>{studentDetails.address}</p>
+              </div>
+              <div>
+                <p className="font-semibold">Age:</p>
+                <p>{studentDetails.age}</p>
+              </div>
+              <div>
+                <p className="font-semibold">Gender:</p>
+                <p>{studentDetails.gender}</p>
+              </div>
             </div>
           </div>
         </div>

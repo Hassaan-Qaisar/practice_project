@@ -19,23 +19,35 @@ export const StudentList = () => {
   }, []);
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Students</h1>
-      {students.length > 0 && (
-        <div className="grid grid-cols-2 gap-4">
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-6 text-center">Students</h1>
+      {students.length > 0 ? (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {students.map((studentItem) => (
-            <div key={studentItem.id} className="border p-4">
-              <h2 className="text-lg font-bold mb-2">{studentItem.name}</h2>
-              <ul>
-                {studentItem.classIDs.map((itemClass) => (
-                  <li key={itemClass.id}>
-                    <Link to={`/classes/${itemClass}`}>{itemClass}</Link>
-                  </li>
-                ))}
-              </ul>
+            <div
+              key={studentItem.id}
+              className="bg-white shadow-lg rounded-lg overflow-hidden"
+            >
+              <div className="px-6 py-4">
+                <h2 className="text-xl font-bold mb-2">{studentItem.name}</h2>
+                <ul className="list-disc">
+                  {studentItem.class.map((item) => (
+                    <li key={item.id}>
+                      <Link
+                        to={`/classes/${item.id}`}
+                        className="text-blue-500 hover:underline"
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           ))}
         </div>
+      ) : (
+        <p className="text-center">Loading students details...</p>
       )}
     </div>
   );

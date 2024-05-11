@@ -19,23 +19,35 @@ export const ClassList = () => {
   }, []);
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Classes</h1>
-      {classes.length > 0 && (
-        <div className="grid grid-cols-2 gap-4">
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-6 text-center">Classes</h1>
+      {classes.length > 0 ? (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {classes.map((classItem) => (
-            <div key={classItem.id} className="border p-4">
-              <h2 className="text-lg font-bold mb-2">{classItem.name}</h2>
-              <ul>
-                {classItem.studentIDs.map((student) => (
-                  <li key={student.id}>
-                    <Link to={`/students/${student}`}>{student}</Link>
-                  </li>
-                ))}
-              </ul>
+            <div
+              key={classItem.id}
+              className="bg-white shadow-lg rounded-lg overflow-hidden"
+            >
+              <div className="px-6 py-4">
+                <h2 className="text-xl font-bold mb-2">{classItem.name}</h2>
+                <ol className="list-decimal">
+                  {classItem.students.map((student) => (
+                    <li key={student.id}>
+                      <Link
+                        to={`/students/${student.id}`}
+                        className="text-blue-500 hover:underline"
+                      >
+                        {student.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </div>
           ))}
         </div>
+      ) : (
+        <p className="text-center" >Loading class details...</p>
       )}
     </div>
   );

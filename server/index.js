@@ -19,7 +19,13 @@ prisma
 // Route to get all classes
 app.get("/api/classes", async (req, res) => {
   try {
-    const classes = await prisma.class.findMany();
+    const classes = await prisma.class.findMany({
+      include: {
+        students: {
+          select: { id: true, name: true }
+        },
+      },
+    });
     res.json(classes);
   } catch (error) {
     console.error("Error fetching classes:", error);
@@ -50,7 +56,13 @@ app.get("/api/classes/:id", async (req, res) => {
 // Route to get all students
 app.get("/api/students", async (req, res) => {
   try {
-    const students = await prisma.student.findMany();
+    const students = await prisma.student.findMany({
+      include: {
+        class: {
+          select: { id: true, name: true }, 
+        },
+      },
+    });
     res.json(students);
   } catch (error) {
     console.error("Error fetching students:", error);
