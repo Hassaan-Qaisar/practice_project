@@ -1,5 +1,4 @@
 const express = require("express");
-const { PrismaClient } = require("@prisma/client");
 const dotenv = require("dotenv");
 const cors = require('cors');
 const classController = require('./controller/classController');
@@ -9,14 +8,6 @@ dotenv.config();
 
 const app = express();
 app.use(cors());
-
-const prisma = new PrismaClient();
-
-// Log message when Prisma Client is instantiated
-prisma
-  .$connect()
-  .then(() => console.log("Database connected successfully"))
-  .catch((error) => console.error("Error connecting to database:", error));
 
 // Routes for classes
 app.get("/api/classes", classController.getAllClasses);
