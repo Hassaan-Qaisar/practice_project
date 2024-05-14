@@ -8,12 +8,14 @@ import { StudentDetails } from './Components/StudentDetails';
 
 function App() {
   return (
+    // Wrap the entire application with BrowserRouter to enable routing
     <BrowserRouter>
       <Routes>
+        {/* Defines routes for different components */}
         <Route path="/" element={<MainPage />} />  
-        <Route path="/classes" element={<ClassList />} />
+        <Route path="/allClasses" element={<ClassList />} />
         <Route path="/classes/:id" element={<ClassDetails />} />
-        <Route path="/students" element={<StudentList />} />
+        <Route path="/allStudents" element={<StudentList />} />
         <Route path="/students/:id" element={<StudentDetails />} />
       </Routes>
     </BrowserRouter>

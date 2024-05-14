@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Loader } from "./Loader";
 
 export const ClassList = () => {
   const [classes, setClasses] = useState([]);
 
+  // Fetches classes data on component mount
   useEffect(() => {
     const fetchClasses = async () => {
       try {
@@ -19,14 +21,16 @@ export const ClassList = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6 text-center">Classes</h1>
+    <div className="min-h-screen mx-auto px-4 py-8 bg-gradient-to-br from-purple-200 to-blue-300">
+      <h1 className="text-3xl font-bold mb-6 text-center text-blue-500 font-roboto">
+        All Classes
+      </h1>
       {classes.length > 0 ? (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 ">
           {classes.map((classItem) => (
             <div
               key={classItem.id}
-              className="bg-white shadow-lg rounded-lg overflow-hidden"
+              className="bg-white bg-opacity-20 shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out hover:bg-opacity-50"
             >
               <div className="px-6 py-4">
                 <h2 className="text-xl font-bold mb-2">{classItem.name}</h2>
@@ -47,7 +51,8 @@ export const ClassList = () => {
           ))}
         </div>
       ) : (
-        <p className="text-center" >Loading class details...</p>
+        <Loader />
+        // <p className="text-center" >Loading class details...</p>
       )}
     </div>
   );

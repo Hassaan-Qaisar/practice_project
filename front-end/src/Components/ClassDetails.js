@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Loader } from "./Loader";
 
 export const ClassDetails = () => {
   const { id } = useParams();
   const [classDetails, setClassDetails] = useState(null);
 
+  // Fetches class details on component mount or ID change
   useEffect(() => {
     const fetchClass = async () => {
       try {
@@ -22,11 +24,13 @@ export const ClassDetails = () => {
   }, [id]);
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen mx-auto px-4 py-8 bg-gradient-to-br from-purple-200 to-blue-300">
       {classDetails ? (
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="bg-white bg-opacity-20 shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out hover:bg-opacity-50">
           <div className="px-6 py-4">
-            <h2 className="text-xl font-bold mb-4">{classDetails.name}</h2>
+            <h2 className="text-xl font-bold mb-4 font-roboto">
+              {classDetails.name}
+            </h2>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="font-semibold">Class Room:</p>
@@ -44,7 +48,8 @@ export const ClassDetails = () => {
           </div>
         </div>
       ) : (
-        <p className="text-center">Loading classes details...</p>
+        <Loader />
+        // <p className="text-center">Loading classes details...</p>
       )}
     </div>
   );

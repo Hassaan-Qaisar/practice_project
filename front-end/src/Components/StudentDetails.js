@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Loader } from "./Loader";
 
 export const StudentDetails = () => {
   const { id } = useParams();
   const [studentDetails, setStudentDetails] = useState(null);
 
+  // Fetches student details on component mount or ID change
   useEffect(() => {
     const fetchStudent = async () => {
       try {
@@ -22,11 +24,13 @@ export const StudentDetails = () => {
   }, [id]);
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen mx-auto px-4 py-8 bg-gradient-to-br from-purple-200 to-blue-300">
       {studentDetails ? (
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="bg-white bg-opacity-20 shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out hover:bg-opacity-50">
           <div className="px-6 py-4">
-            <h2 className="text-xl font-bold mb-4">{studentDetails.name}</h2>
+            <h2 className="text-xl font-bold mb-4 font-roboto">
+              {studentDetails.name}
+            </h2>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="font-semibold">Roll Number:</p>
@@ -52,7 +56,8 @@ export const StudentDetails = () => {
           </div>
         </div>
       ) : (
-        <p className="text-center">Loading student details...</p>
+        <Loader />
+        // <p className="text-center">Loading student details...</p>
       )}
     </div>
   );
